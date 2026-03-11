@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de clientes</title>
+</head>
+<body>
+    <h3>Listado de clientes </h3>
+    <div>
+        <a href="">Nuevo cliente</a>
+    </div>
+    <table>
+        <thead>
+            <th>acciones</th>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+        </thead>
+        <tbody>
+            {% for cliente in lista_clientes%}
+                <tr>
+                    <td>
+                        <a href="">Editar</a>
+                        <a href="">Eliminar</a>
+                    </td>
+                    <td>{{cliente.0}}</td>
+                    <td>{{cliente.1}}</td>
+                    <td>{{cliente.2}}</td>
+                    <td>{{cliente.3}}</td>
+                    <td>{{cliente.4}}</td>
+                    <td>{{cliente.5}}</td>
+             </tr>
+            {% endfor %} 
+        </tbody>
+    </table>
+
+
+
+</body>
+</html>
