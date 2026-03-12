@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Listado de productos </h3>
+    <div>
+        <a href="">Nuevo cliente</a>
+    </div>
+    <table>
+        <thead>
+            <th>acciones</th>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>descripcion</th>
+            <th>precio</th>
+            <th>costo</th>
+            <th>stock</th>
+        </thead>
+        <tbody>
+            {% for producto in lista_productos%}
+                <tr>
+                    <td>
+                        <a href="">Editar</a>
+                        <a href="">Eliminar</a>
+                    </td>
+                    <td>{{producto.0}}</td>
+                    <td>{{producto.1}}</td>
+                    <td>{{producto.2}}</td>
+                    <td>{{producto.3}}</td>
+                    <td>{{producto.4}}</td>
+                    <td>{{producto.5}}</td>
+             </tr>
+            {% endfor %} 
+        </tbody>
+    </table>
+
+
+    
+</body>
+</html>

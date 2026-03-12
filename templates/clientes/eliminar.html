@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Agregar cliente</title>
+</head>
+<body>
+      <form action="" method="POST">
+        <label>Nombre:</label>
+        <input type="text" name="Nombre" required maxlength="100" value="{{cliente.1}}" disabled>
+        
+        <label>Apellido:</label>
+        <input type="text" name="CliApellido" required maxlength="100" value="{{cliente.2}}" disabled>
+        
+        <label>Correo:</label>
+        <input type="email" name="CliCorreo" required maxlength="100" value="{{cliente.3}}" disabled>
+        
+        <label>Teléfono:</label>
+        <input type="text" name="CliTelefono" required maxlength="50" value="{{cliente.4}}" disabled>
+        
+        <label>Dirección:</label>
+        <textarea name="CliDireccion" rows="4" cols="50" required disabled>{{cliente.5}}</textarea >
+        
+        <input type="submit" value="Eliminar Cliente">
+        <a href="/">Volver</a>
+    </form>
+
+</body>
+</html>
