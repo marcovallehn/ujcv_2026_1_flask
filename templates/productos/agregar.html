@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/productos/agregar" method="post">
+        <label for="ProNombre">Nombre:</label>
+        <input type="text" id="ProNombre" name="ProNombre" required>
+        <label for="ProDescripcion">Descripción:</label>
+        <input type="text" id="ProDescripcion" name="ProDescripcion" required>
+        <label for="ProPrecio">Precio:</label>
+        <input type="number" id="ProPrecio" name="ProPrecio" step="0.01" required>
+        <label for="ProCosto">Costo:</label>
+        <input type="number" id="ProCosto" name="ProCosto" step="0.01" required>
+        <label for="ProStock">Stock:</label>
+        <input type="number" id="ProStock" name="ProStock" required>
+        <input type="submit" value="Agregar Producto">
+    
+</body>
+</html>
