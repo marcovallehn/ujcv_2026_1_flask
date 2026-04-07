@@ -1,16 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h3>Listado de productos </h3>
+{% extends 'base.html' %}
+
+{% block titulo %}Listado de Productos{% endblock %}
+
+
+{% block contenido %}
+    
+
+
     <div>
-        <a href="/productos/agregar">Nuevo producto</a>
+        <a href="/productos/agregar" class="btn btn-primary">
+            <i class="bi bi-file-earmark-plus"></i>
+            Nuevo producto
+        </a>
     </div>
-    <table>
+    
+<div class="card">
+  <h5 class="card-header">Listado de Productos</h5>
+  <div class="card-body">
+    <table id="productos" class="table table-striped">
         <thead>
             <th>acciones</th>
             <th>Codigo</th>
@@ -24,8 +31,14 @@
             {% for producto in lista_productos%}
                 <tr>
                     <td>
-                        <a href="">Editar</a>
-                        <a href="">Eliminar</a>
+                        <a href="" class="btn btn-success">
+                            <i class="bi bi-pencil-square"></i>
+                            
+                        </a>
+                        <a href="" class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                            Eliminar
+                        </a>
                     </td>
                     <td>{{producto.0}}</td>
                     <td>{{producto.1}}</td>
@@ -37,8 +50,24 @@
             {% endfor %} 
         </tbody>
     </table>
-
-
+  </div>
+</div>
     
+ {% endblock %}   
+    
+    
+    
+    
+    
+    
+   {% block scripts %}
+    
+   <script>
+       
+           new DataTable('#productos');
+      
+   </script>
+
+   {% endblock %}
 </body>
 </html>
