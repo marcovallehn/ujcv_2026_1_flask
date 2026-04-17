@@ -1,127 +1,21 @@
-from flask import Flask, jsonify, render_template, request, redirect, url_for
-import mysql.connector
+from flask import Flask, render_template
+
+from bpClientes import bpclientes
+from bpProductos import bpproductos
+from bpProveedores import bpproveedores
+import bpProductos
+
 
 app = Flask(__name__)
 
-conn = mysql.connector.connect(
-            host='localhost',
-            user='root',
-            password='',
-            database='ujcv_2026_2_progra2',
-            ssl_disabled=True  # Desactiva SSL
-        )
+app.register_blueprint(bpclientes)
+app.register_blueprint(bpproductos)
+app.register_blueprint(bpproveedores)
 
 
 @app.route("/")
 def index():
     return render_template('index.html')
-
-
-
-@app.route("/clientes/")
-def clientes_index():
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM clientes")
-    datos = cur.fetchall()
-    cur.close()
-    return render_template('clientes/index.html', lista_clientes=datos)
-
-
-@app.route("/clientes/agregar", methods=["GET", "POST"])
-def agregar_datos():
-    if request.method == 'POST':
-        cursor = conn.cursor()
-        nombre= request.form['CliNombre']
-        apellido = request.form['CliApellido']
-        correo = request.form['CliCorreo']
-        telefono = request.form['CliTelefono']
-        direccion=request.form['CliDireccion']
-        cursor.execute("insert into clientes(CliNombre,CliApellido, CliCorreo, CliTelefono, CliDireccion) values(%s, %s, %s, %s, %s)", (nombre, apellido, correo, telefono, direccion))
-        conn.commit()
-        return redirect(url_for('clientes_index'))
-    elif request.method=='GET':
-         return render_template('/clientes/agregar.html')
-
-
-@app.route("/clientes/editar/<string:codigo>",  methods=["GET","POST"])
-def editar(codigo):
-    if request.method == 'GET':
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM clientes where CliCodigo=%s", (codigo,))
-        cliente = cur.fetchone()
-        return render_template('/clientes/editar.html', cliente=cliente)
-    elif request.method=='POST': 
-        cursor = conn.cursor()
-        nombre= request.form['CliNombre']
-        apellido = request.form['CliApellido']
-        correo = request.form['CliCorreo']
-        telefono = request.form['CliTelefono']
-        direccion=request.form['CliDireccion']
-        cursor.execute("update clientes set CliNombre=%s , CliApellido=%s, CliCorreo=%s, CliTelefono=%s, CliDireccion=%s where CliCodigo=%s", (nombre, apellido, correo, telefono, direccion,codigo))
-        conn.commit()
-        return redirect(url_for('clientes_index'))
-
-
-@app.route("/clientes/eliminar/<string:codigo>",  methods=["GET","POST"])
-def eliminar(codigo):
-    if request.method == 'GET':
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM clientes where CliCodigo=%s", (codigo,))
-        cliente = cursor.fetchone()
-        return render_template('/clientes/eliminar.html', cliente=cliente)
-    elif request.method=='POST': 
-        cursor = conn.cursor()
-        cursor.execute(" delete from clientes where CliCodigo=%s", (codigo,))
-        conn.commit()
-        return redirect(url_for('clientes_index'))
-
-
-@app.route("/productos/")
-def productos_index():
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM productos")
-    datos = cur.fetchall()
-    cur.close()
-    return render_template('productos/index.html', lista_productos=datos)
-
-
-
-@app.route("/productos/agregar", methods=["GET", "POST"])
-def productos_agregar_datos():
-    if request.method == 'POST':
-        cursor = conn.cursor()
-        nombre= request.form['ProNombre']
-        descripcion = request.form['ProDescripcion']
-        precio = request.form['ProPrecio']
-        costo = request.form['ProCosto']
-        stock=request.form['ProStock']
-        cursor.execute("insert into productos(ProNombre, ProDescripcion, ProPrecio, ProCosto, ProStock) values(%s, %s, %s, %s, %s)", (nombre, descripcion, precio, costo, stock))
-        conn.commit()
-        return redirect(url_for('productos_index'))
-    elif request.method=='GET':
-         return render_template('/productos/agregar.html')
-
-
-@app.route("/productos/editar/<string:codigo>", methods=["GET", "POST"])
-def productos_editar_datos(codigo):
-    if request.method == 'GET':
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM productos where ProCodigo=%s", (codigo,))
-        producto = cur.fetchone()
-        return render_template('/productos/editar.html', producto=producto)
-    elif request.method=='POST':
-        cursor = conn.cursor()
-        nombre= request.form['ProNombre']
-        descripcion = request.form['ProDescripcion']
-        precio = request.form['ProPrecio']
-        costo = request.form['ProCosto']
-        stock=request.form['ProStock']
-        cursor.execute("update productos set ProNombre=%s, ProDescripcion=%s, ProPrecio=%s, ProCosto=%s, ProStock=%s where ProCodigo=%s", (nombre, descripcion, precio, costo, stock, codigo))
-        conn.commit()
-        return redirect(url_for('productos_index'))
-    
-
-
 
 
 
